@@ -25,8 +25,25 @@ connectDB();
 const app = express();
 
 // Enable CORS
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:3000',
+  process.env.FRONTEND_URL,
+].filter(Boolean); // remove any undefined values
+
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: (origin, callback) => {
+    // Allow requests with no origin (e.g. Postman, mobile apps, server-to-server)
+    if (!origin) return callback(null, true);
+    // Allow any Vercel preview/production deployment subdomain
+    if (
+      allowedOrigins.includes(origin) ||
+      /^https:\/\/.*\.vercel\.app$/.test(origin)
+    ) {
+      return callback(null, true);
+    }
+    callback(new Error(`CORS policy: Origin ${origin} not allowed`));
+  },
   credentials: true, // Allow cookies
   optionsSuccessStatus: 200,
 };
