@@ -1,7 +1,15 @@
 {
   "rewrites": [
     {
-      "source": "/((?!api|uploads).*)|/",
+      "source": "/api/:path*",
+      "destination": "https://job-portal-mcnp.onrender.com/api/:path*"
+    },
+    {
+      "source": "/uploads/:path*",
+      "destination": "https://job-portal-mcnp.onrender.com/uploads/:path*"
+    },
+    {
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ]
