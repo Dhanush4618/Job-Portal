@@ -37,7 +37,7 @@ api.interceptors.response.use(
       originalRequest._retry = true;
       try {
         console.log('Access token expired. Requesting refresh...');
-        const res = await axios.post('/api/auth/refresh', {}, { withCredentials: true });
+        const res = await api.post('/api/auth/refresh', {}, { withCredentials: true });
         const newToken = res.data.token;
 
         // Update local memory token
