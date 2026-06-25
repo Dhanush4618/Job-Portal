@@ -13,7 +13,7 @@ const getAllUsers = async (req, res, next) => {
     if (roleFilter && ['Candidate', 'Recruiter', 'Admin'].includes(roleFilter)) {
       query.role = roleFilter;
     }
-
+    
     const users = await User.find(query).sort({ createdAt: -1 });
     res.json(users);
   } catch (error) {

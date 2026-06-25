@@ -14,7 +14,7 @@ const JobDetails = () => {
 
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(true);
-  
+
   // Application state
   const [hasApplied, setHasApplied] = useState(false);
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
@@ -49,7 +49,7 @@ const JobDetails = () => {
 
   const handleApplySubmit = async (e) => {
     e.preventDefault();
-    
+
     // Validate resume choice
     if (!useProfileResume && !resume) {
       addToast('Please upload a resume file (PDF only)', 'warning');
@@ -66,7 +66,7 @@ const JobDetails = () => {
       setIsSubmitting(true);
       const formData = new FormData();
       formData.append('coverLetter', coverLetter);
-      
+
       if (!useProfileResume && resume) {
         formData.append('resume', resume);
       }
@@ -78,7 +78,7 @@ const JobDetails = () => {
       addToast('Application submitted successfully! Confirmation email dispatched.', 'success');
       setHasApplied(true);
       setIsApplyModalOpen(false);
-      
+
       // Cleanup inputs
       setCoverLetter('');
       setResume(null);
@@ -118,7 +118,7 @@ const JobDetails = () => {
 
       {/* Main Container */}
       <div style={detailsGridStyle}>
-        
+
         {/* Left Column: Job Description details */}
         <div style={{ flex: 2, display: 'flex', flexDirection: 'column', gap: '24px' }}>
           <div className="glass-panel" style={panelStyle}>
@@ -188,11 +188,11 @@ const JobDetails = () => {
 
         {/* Right Column: Actions and Recruiter Details */}
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '24px', minWidth: '300px' }}>
-          
+
           {/* Action Box */}
           <div className="glass-panel" style={actionBoxStyle}>
             <h3 style={{ fontSize: '1.2rem', marginBottom: '16px' }}>Application Summary</h3>
-            
+
             {hasApplied ? (
               <div style={appliedBannerStyle}>
                 <CheckCircle size={20} color="var(--success)" />
@@ -209,9 +209,6 @@ const JobDetails = () => {
                   <Link to={`/jobs/${job._id}/applicants`} className="btn btn-primary" style={{ width: '100%' }}>
                     View Applicants
                   </Link>
-                  <Link to="/manage-jobs" className="btn btn-secondary" style={{ width: '100%' }}>
-                    Manage Posting
-                  </Link>
                 </div>
               ) : (
                 <div style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textAlign: 'center' }}>
@@ -223,7 +220,7 @@ const JobDetails = () => {
                 Login to Apply
               </Link>
             )}
-            
+
             <div style={summarySpecsStyle}>
               <div style={summaryRowStyle}>
                 <span>Date Posted</span>
@@ -249,7 +246,7 @@ const JobDetails = () => {
                   <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{job.recruiter.companyName || 'Verified Recruiter'}</p>
                 </div>
               </div>
-              
+
               {job.recruiter.companyDescription && (
                 <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: '12px', lineHeight: '1.4' }}>
                   {job.recruiter.companyDescription}
@@ -295,7 +292,7 @@ const JobDetails = () => {
               {/* Resume selection toggle */}
               <div className="form-group">
                 <label className="form-label">Resume Document</label>
-                
+
                 {user.resumePath ? (
                   <div style={resumeToggleStyle}>
                     <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
